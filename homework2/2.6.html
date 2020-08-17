@@ -1,0 +1,50 @@
+<script>
+    var arg1 = parseInt(prompt('Введите число'));
+    var operation = prompt('Введите операцию');
+    var arg2 = parseInt(prompt('Введите ещё одно число'));
+
+
+    mathOperation(arg1, arg2, operation);
+
+    function mathOperation(arg1, arg2, operation) {
+        switch (operation) {
+            case "+":
+                alert(sum(arg1, arg2));
+                break;
+            case "*":
+                alert(multiplication(arg1, arg2));
+                break;
+            case "/":
+                alert(division(arg1, arg2));
+                break;
+            case "-":
+                alert(subtraction(arg1, arg2));
+                break;
+            default:
+                alert("Поломка");
+        }
+    }
+
+    function sum(a, b) {
+        return a + b;
+    }
+
+    function multiplication(a, b) {
+        return a * b;
+    }
+
+    function division(a, b) {
+        return a / b;
+    }
+
+    function subtraction(a, b) {
+        return a - b;
+    }
+
+</script>
+
+
+6. Реализовать функцию с тремя параметрами: function mathOperation(arg1, arg2, operation),
+где arg1, arg2 – значения аргументов, operation – строка с названием операции.
+В зависимости от переданного значения операции выполнить одну из арифметических операций
+(использовать функции из пункта 3) и вернуть полученное значение (использовать switch).
