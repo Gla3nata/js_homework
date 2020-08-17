@@ -1,0 +1,31 @@
+<script>
+  var basket = [
+    {
+        title: "Товар 1",
+        price:100,
+        count:1
+    },
+    {
+        title: "Товар 2",
+        price:200,
+        count:1
+    },
+    {
+        title: "Товар 3",
+        price:300,
+        count:3
+    }
+];
+
+function countBasketPrice(basket){
+    var total=0;
+     for(var tovar of basket){
+      total=total + tovar.price * tovar.count;
+        }
+        document.write("Сумма заказа = "+total);
+        
+    }
+    
+countBasketPrice(basket);  
+
+</script>
