@@ -4,7 +4,7 @@
 		tens:0,
 	    hundreds:0
 	};
-	var number = parseInt(prompt('Введите число от 0 до 999'));
+	var number = +prompt('Введите число от 0 до 999');
 
 
 f(number);
@@ -18,11 +18,5 @@ f(number);
 	object.tens = Math.trunc(number/10)%10;
 	object.ed = number%10;
 	 console.log(object);
-
-
-
-		
-
-
 	}
 </script>
