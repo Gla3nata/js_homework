@@ -1,0 +1,22 @@
+<script>
+	var object = {
+		ed:0,
+		tens:0,
+	    hundreds:0
+	};
+	var number = +prompt('Введите число от 0 до 999');
+
+
+f(number);
+
+	function f(number){
+		 if(number > 999 || number < 0) {
+	 	console.log('Число не подходящее');
+	 	return object;
+	 }
+	 object.hundreds = Math.trunc(number/100);
+	object.tens = Math.trunc(number/10)%10;
+	object.ed = number%10;
+	 console.log(object);
+	}
+</script>
