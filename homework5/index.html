@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="matrix.js"></script>
+</head>
+
+<body>
+    <script>
+        var table = "<table>";
+
+        for (var i = 0; i < matrix.length; i++) {
+
+            table += "<tr>";
+
+            var row = matrix[i];
+
+            for (var k = 0; k < row.length; k++) {
+                table += "<td></td>";
+            }
+        }
+
+        table += "</table>";
+        document.write(table);
+
+        var rowMatrix = document.querySelectorAll("tr");
+
+        for (var i = 0; i < rowMatrix.length; i++) {
+
+            var colTd = rowMatrix[i].querySelectorAll("td");
+
+            for (var k = 0; k < colTd.length; k++) {
+                var col = colTd[k];
+                var colMatrix = matrix[i][k];
+
+                col.innerHTML += colMatrix.text;
+                col.style.backgroundColor = colMatrix.backGround;
+                col.style.color = colMatrix.color;
+            }
+        }
+
+    </script>
+</body>
+
+</html>
