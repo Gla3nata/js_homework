@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <span>Корзина</span>
+    <div id="basket">
+    </div>
+    <div id="products">
+    </div>
+
+    <script>
+        var basket = [];
+
+        var products = [{
+            name: "Стул",
+            count: 0,
+            picture: "img/1.jpg",
+            price: 1000
+        }, {
+            name: "Стол",
+            count: 0,
+            picture: "img/2.jpg",
+            price: 2000
+        }, {
+            name: "Комод",
+            count: 0,
+            picture: "img/3.jpg",
+            price: 3000
+        }];
+
+        var divProducts = document.querySelector('#products');
+
+        for (var i = 0; i < products.length; i++) {
+            var childDiv = document.createElement("div");
+            var childH1 = document.createElement("h1");
+            var childImg = document.createElement("img");
+            var childSpan = document.createElement("span");
+            var childButton = document.createElement("button");
+            var product = products[i];
+
+            childH1.innerHTML = product.name;
+            childImg.src = product.picture;
+            childImg.width = 150;
+            childImg.height = 150;
+            childSpan.innerHTML = product.price;
+            childButton.onclick = f;
+            childButton.innerHTML = 'Купить';
+            childButton.name = product.name;
+            childButton.price = product.price;
+
+            childDiv.appendChild(childH1);
+            childDiv.appendChild(childImg);
+            childDiv.appendChild(childSpan);
+            childDiv.appendChild(childButton);
+
+            divProducts.appendChild(childDiv);
+        }
+
+        function f(event) {
+            var basketProducts = document.querySelector('#basket');
+            //чистим таблицу
+            while (basketProducts.lastElementChild) {
+                basketProducts.removeChild(basketProducts.lastElementChild);
+            }
+
+            var needAdd = true;
+            //это цикл ищеет по имени продукт в корзине
+            for (var j = 0; j < basket.length; j++) {
+                var product = basket[j];
+                if (product.name == event.target.name) {
+                    needAdd = false;
+                    product.count += 1;
+                }
+            };
+            if (needAdd) {
+                basket.push({
+                    name: event.target.name,
+                    count: 1,
+                    price: event.target.price,
+                    totalPrice: 0
+                })
+            }
+            var childTable = document.createElement("table");
+
+            for (var i = 0; i < basket.length; i++) {
+                var tr = document.createElement("tr");
+                var tdName = document.createElement("td");
+                var tdPrice = document.createElement("td");
+                var tdCount = document.createElement("td");
+                var product = basket[i];
+                product.totalPrice = product.price * product.count;
+
+                tdName.innerHTML = product.name;
+                tdCount.innerHTML = product.count;
+                tdPrice.innerHTML = product.totalPrice;
+
+                tr.appendChild(tdName);
+                tr.appendChild(tdCount);
+                tr.appendChild(tdPrice);
+                childTable.appendChild(tr)
+            }
+            var tr = document.createElement("tr");
+            var tdName = document.createElement("td");
+            var tdCount = document.createElement("td");
+            var tdPrice = document.createElement("td");
+
+            tdName.innerHTML = "Итого"
+            tdPrice.innerHTML = totalPrice(basket);
+
+            tr.appendChild(tdName);
+            tr.appendChild(tdCount);
+            tr.appendChild(tdPrice);
+            childTable.appendChild(tr);
+
+            basketProducts.appendChild(childTable);
+        }
+        
+        function totalPrice(basket) {
+            var summ = 0;
+            for (var i = 0; i < basket.length; i++) {
+                summ += basket[i].totalPrice;
+            }
+            return summ;
+        }
+    </script>
+</body>
+
+</html>
