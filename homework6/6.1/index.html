@@ -1,0 +1,21 @@
+<img onclick="zoomJpg('1.jpg')" src="small/1.jpg" height="200" alt="one">
+<img onclick="zoomJpg('2.jpg')" src="small/2.jpg" height="200" alt="two">
+<img onclick="zoomJpg('3.jpg')" src="small/3.jpg" height="200" alt="three">
+<img src="">
+
+<script>
+    function zoomJpg(name) {
+        var path = 'big/' + name;
+
+        var img = document.createElement('img');
+        img.src = path;
+
+        img.onload = function() {
+            document.images[3].src = path;
+        };
+
+        img.onerror = function() {
+            alert("Ошибка во время загрузки изображения");
+        };
+    }
+</script>

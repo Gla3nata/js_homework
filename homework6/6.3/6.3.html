@@ -1,0 +1,39 @@
+<img id="picture" src="" height="200" alt="one">
+<br>
+<button id="left" style="margin-left: 130px; margin-top: 10px;">&#11164;</button>
+<button id="right">&#11166;</button>
+
+
+<script>
+    var pictures = [
+        "../6.1/small/1.jpg",
+        "../6.1/small/2.jpg",
+        "../6.1/small/3.jpg"
+    ];
+
+    var currentPosition = 0;
+    var maxIndex = pictures.length - 1;
+
+    var img = document.querySelector('#picture');
+    img.src = pictures[currentPosition];
+
+
+    var left = document.querySelector('#left');
+    left.onclick = changePicture;
+
+    var right = document.querySelector('#right');
+    right.onclick = changePicture;
+
+    function changePicture(event) {
+        switch (event.target) {
+            case left:
+                currentPosition = currentPosition - 1 < 0 ? maxIndex : currentPosition - 1;
+                break;
+            case right:
+                currentPosition = currentPosition + 1 > maxIndex ? 0 : currentPosition + 1;
+                break;
+        }
+        img.src = pictures[currentPosition];
+    }
+
+</script>
