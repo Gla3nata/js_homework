@@ -114,19 +114,32 @@ function move() {
 
     // Определяем новую точку
     if (direction == 'x-') {
-        new_unit = document.getElementsByClassName('cell-' + (coord_y) + '-' + (coord_x - 1))[0];
+         new_unit = document.getElementsByClassName('cell-' + (coord_y) + '-' + (coord_x - 1))[0];
+        if (new_unit === undefined) {
+            new_unit = document.getElementsByClassName('cell-' + (coord_y) + '-' + (FIELD_SIZE_X - 1))[0];
+        }
     } else if (direction == 'x+') {
         new_unit = document.getElementsByClassName('cell-' + (coord_y) + '-' + (coord_x + 1))[0];
+        if (new_unit === undefined) {
+            new_unit = document.getElementsByClassName('cell-' + (coord_y) + '-' + (0))[0];
+        }
     } else if (direction == 'y+') {
         new_unit = document.getElementsByClassName('cell-' + (coord_y - 1) + '-' + (coord_x))[0];
+        if (new_unit === undefined) {
+            new_unit = document.getElementsByClassName('cell-' + (FIELD_SIZE_Y - 1) + '-' + (coord_x))[0];
+        }
     } else if (direction == 'y-') {
         new_unit = document.getElementsByClassName('cell-' + (coord_y + 1) + '-' + (coord_x))[0];
+        if (new_unit === undefined) {
+            new_unit = document.getElementsByClassName('cell-' + (0) + '-' + (coord_x))[0];
+        }
     }
 
     // Проверки
     // 1) new_unit не часть змейки
     // 2) Змейка не ушла за границу поля
     //console.log(new_unit);
+
     if (!isSnakeUnit(new_unit) && new_unit !== undefined) {
         // Добавление новой части змейки
         new_unit.setAttribute('class', new_unit.getAttribute('class') + ' snake-unit');
@@ -177,10 +190,10 @@ function haveFood(unit) {
 
         score++;
         showScore();
-    } else if (unit_classes.includes('bomb-unit')){
+    } else if (unit_classes.includes('bomb-unit')) {
         finishTheGame();
     }
-    
+
     return check;
 }
 
@@ -203,7 +216,6 @@ function createFood() {
             for (var i = 0; i < food_cell_classes.length; i++) {
                 classes += food_cell_classes[i] + ' ';
             }
-
             food_cell.setAttribute('class', classes + 'food-unit');
             foodCreated = true;
         }
@@ -230,12 +242,15 @@ function createBomb() {
 
             bomb_cell.setAttribute('class', classes + 'bomb-unit');
             bombCreated = true;
-            setTimeout(() => clearBomb(bomb_cell), 5000);
+            setTimeout(() => clearBomb(bomb_cell, bomb_x, bomb_y), 5000);
         }
     }
 }
-function clearBomb(cell) {
-    cell.setAttribute('class', ' ');
+
+function clearBomb(cell, x, y) {
+    //    game-table-cell cell-7-5
+
+    cell.setAttribute('class', 'game-table-cell cell-' + y + '-' + x);
     createBomb();
 }
 
